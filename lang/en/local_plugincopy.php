@@ -25,3 +25,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Plugins copy';
+$string['plugindescription'] = 'Copy contrib/3rd party plugin files to new location. Must be run from command line';

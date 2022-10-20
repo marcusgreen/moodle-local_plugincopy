@@ -26,21 +26,25 @@ require_once(__DIR__ . '/../../config.php');
 defined('MOODLE_INTERNAL') || die();
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url('/local/plugincopy');
+
+$PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
+
+
 $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
 echo $OUTPUT->header();
-echo '<h1> Plugin copy</h1>';
-echo '<p>Copy contrib/3rd party plugin files to new location. Must be run from command line</p> ';
-//                echo  \core\dataformat::download_data('myfile', $export, array_keys($data[0]), $data);
+echo '<h1>'. get_string('pluginname', 'local_plugincopy').'</h1>';
+echo '<p>'.get_string('plugindescription', 'local_plugincopy').'</p>';
 
 $contribs = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {
     foreach ($pluginnames as $pluginname => $pluginfo) {
         if (!$pluginfo->is_standard()) {
-           $info = $pluginfo->type. '_'.$pluginfo->name .', version, '.$pluginfo->release;
-           echo $info;
-           echo '<br/>';
+            $contribs['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version, '.$pluginfo->release;
         }
     }
 }
+
+echo $OUTPUT->render_from_template('local_plugincopy/pluginlist', $contribs);
+
 echo $OUTPUT->footer();
