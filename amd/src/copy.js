@@ -18,21 +18,40 @@
  * @copyright 2022 Marcus Green
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- import {clipboardWrapper} from './clipboardwrapper';
 
  export const init = () => {
-       clipboardWrapper();
-
+      alert('init');
+      console.log('init');
       document.getElementById("copyButton")
-        .onclick = function() {
-          debugger;
-          let text = document.getElementById("names").value;
-          navigator.clipboard.writeText(text)
-            .then(() => {
-              alert('Text copied to clipboard');
-            })
-            .catch(err => {
-              alert('Error in copying text: ', err);
-            });
+         .onclick = function() {
+          alert('copy clicked');
+          clipboard.data = 'MAVG';
+
+          if (window.clipboardData)
+          {
+            window.clipboardData.setData('Text', clipboard.data);
+          }
+          else
+          {
+            clipboard.intercept = true;
+            document.execCommand('copy');
+          }
+
         };
+        var clipboard = {
+          data      : '',
+          intercept : false,
+          hook      : function (evt)
+          {
+            if (clipboard.intercept)
+            {
+              evt.clipboardData.setData('text/plain', clipboard.data);
+              evt.preventDefault();
+
+              clipboard.intercept = false;
+              clipboard.data      = '';
+            }
+          }
+        };
+
 };
