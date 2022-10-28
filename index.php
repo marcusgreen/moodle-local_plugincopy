@@ -27,14 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url('/local/plugincopy');
 
-$PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
+// $PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
 
 
 $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
 echo $OUTPUT->header();
-echo '<h1>'. get_string('pluginname', 'local_plugincopy').'</h1>';
-echo '<p>'.get_string('plugindescription', 'local_plugincopy').'</p>';
+// admin_externalpage_setup('local_plugincopy', '', []);
+
 
 $contribs = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {

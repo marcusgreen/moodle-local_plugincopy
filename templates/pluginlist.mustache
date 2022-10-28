@@ -1,50 +1,52 @@
 {{!
-    This file is part of Moodle - https://moodle.org/
+This file is part of Moodle - https://moodle.org/
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
 }}
 {{!
-    @template plugintype_pluginname/template_name
+@template plugintype_pluginname/template_name
 
-    Template purpose and description.
+Template purpose and description.
 
-    Classes required for JS:
-    * none
+Classes required for JS:
+* none
 
-    Data attributes required for JS:
-    * none
+Data attributes required for JS:
+* none
 
-    Context variables required for this template:
-    * none
+Context variables required for this template:
+* none
 
-    Example context (json):
-    {
-    }
+Example context (json):
+{
+}
+
 
 
 }}
-
-<div class="container">
-<button id="copyButton" type="button" class="btn btn-primary">Copy plugin names</button>
-
-{{#plugins}}
-<div id="names">
-<div class="row">
-{{name}}
+<div class="h1">
+{{#str}}pluginname, local_plugincopy{{/str}}
+</div>
+<div class="h4">
+{{#str}}plugindescription, local_plugincopy{{/str}}
 </div>
 
-{{/plugins}}
-</div>
-</div>
-
+    <div class="d-grid">
+        {{#plugins}}
+        <div id="names" class="bg-light shadow border h5 p-1 m-0 col-sm-5">
+            {{name}}
+        </div>
+        {{/plugins}}
+    </div>
