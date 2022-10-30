@@ -33,7 +33,19 @@ $PAGE->set_url('/local/plugincopy');
 $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
 echo $OUTPUT->header();
+global $DB;
 // admin_externalpage_setup('local_plugincopy', '', []);
+echo php_uname('s');
+echo ('<br/>');
+echo phpversion();
+echo ('<br/>');
+
+echo $DB->get_dbfamily();
+echo ('<br/>');
+
+echo $_SERVER['SERVER_SOFTWARE'];
+echo ('<br/>');
+
 
 
 $contribs = [];
