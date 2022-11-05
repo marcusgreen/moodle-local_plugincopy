@@ -34,29 +34,21 @@ $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
 echo $OUTPUT->header();
 global $DB;
-// admin_externalpage_setup('local_plugincopy', '', []);
-echo php_uname('s');
-echo ('<br/>');
-echo phpversion();
-echo ('<br/>');
+$data = [];
+$data['serverinfo']['os'] = php_uname('s');
+$data['serverinfo']['phpversion'] = phpversion();
+$data['serverinfo']['database'] = $DB->get_dbfamily();
+$data['serverinfo']['webserver'] = $_SERVER['SERVER_SOFTWARE'];
+$data['serverinfo']['moodleversion'] = $CFG->release;
 
-echo $DB->get_dbfamily();
-echo ('<br/>');
-
-echo $_SERVER['SERVER_SOFTWARE'];
-echo ('<br/>');
-
-
-
-$contribs = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {
     foreach ($pluginnames as $pluginname => $pluginfo) {
         if (!$pluginfo->is_standard()) {
-            $contribs['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version, '.$pluginfo->release;
+            $data['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version: '.$pluginfo->release;
         }
     }
 }
 
-echo $OUTPUT->render_from_template('local_plugincopy/pluginlist', $contribs);
+echo $OUTPUT->render_from_template('local_plugincopy/pluginlist', $data);
 
 echo $OUTPUT->footer();

@@ -26,3 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Plugins copy';
 $string['plugindescription'] = 'Copy contrib/3rd party plugin files to new location. Must be run from command line';
+$string['moodleversion'] = 'Moodle version';
+$string['phpversion'] = 'PHP Version';
+$string['operatingsystem'] = 'Operating system';
+$string['webserver'] = 'Web server';
+$string['database'] = 'Database';

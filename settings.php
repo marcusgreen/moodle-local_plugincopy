@@ -27,12 +27,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
+    $ADMIN->add('development', new admin_externalpage('local_plugincopy_navigation',
+    get_string('pluginname', 'local_plugincopy'),
+    new moodle_url('/local/plugincopy/index.php')));
     $settings = new admin_settingpage(
         'local_plugincopy',
         get_string('pluginname', 'local_plugincopy')
     );
-    if ($ADMIN->fulltree) {
 
-    }
     $ADMIN->add('localplugins', $settings);
 }

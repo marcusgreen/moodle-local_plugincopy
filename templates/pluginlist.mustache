@@ -42,6 +42,14 @@ Example context (json):
 <div class="h4">
 {{#str}}plugindescription, local_plugincopy{{/str}}
 </div>
+<ul>
+    <li>{{#str}}moodleversion, local_plugincopy{{/str}}: {{serverinfo.moodleversion}}</li>
+    <li>{{#str}}phpversion, local_plugincopy{{/str}}: {{serverinfo.phpversion}}</li>
+    <li>{{#str}}operatingsystem, local_plugincopy{{/str}}: {{serverinfo.os}}</li>
+    <li>{{#str}}webserver, local_plugincopy{{/str}}: {{serverinfo.webserver}}</li>
+    <li>{{#str}}database, local_plugincopy{{/str}}: {{serverinfo.database}}</li>
+
+</ul>
 
     <div class="d-grid">
         {{#plugins}}
