@@ -42,13 +42,25 @@ Example context (json):
 <div class="h4">
 {{#str}}plugindescription, local_plugincopy{{/str}}
 </div>
+<h2> {{#str}}configuration, local_plugincopy{{/str}}</h2>
+
 <ul>
     <li>{{#str}}moodleversion, local_plugincopy{{/str}}: {{serverinfo.moodleversion}}</li>
     <li>{{#str}}phpversion, local_plugincopy{{/str}}: {{serverinfo.phpversion}}</li>
     <li>{{#str}}operatingsystem, local_plugincopy{{/str}}: {{serverinfo.os}}</li>
     <li>{{#str}}webserver, local_plugincopy{{/str}}: {{serverinfo.webserver}}</li>
     <li>{{#str}}database, local_plugincopy{{/str}}: {{serverinfo.database}}</li>
+</ul>
+<h3>
+{{#str}}fileuploadsettings, local_plugincopy{{/str}}
+    <a href=https://docs.moodle.org/en/File_upload_size>https://docs.moodle.org/en/File_upload_size</a>
+</h3>
 
+
+<ul>
+    <li>{{#str}}postmaxsize, local_plugincopy{{/str}}: {{serverinfo.post_max_size}}</li>
+    <li>{{#str}}uploadmaxfilesize, local_plugincopy{{/str}}: {{serverinfo.upload_max_filesize}}</li>
+    <li>{{#str}}maxexecutiontime, local_plugincopy{{/str}}: {{serverinfo.max_execution_time}}</li>
 </ul>
 
     <div class="d-grid">

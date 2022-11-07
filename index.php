@@ -40,6 +40,9 @@ $data['serverinfo']['phpversion'] = phpversion();
 $data['serverinfo']['database'] = $DB->get_dbfamily();
 $data['serverinfo']['webserver'] = $_SERVER['SERVER_SOFTWARE'];
 $data['serverinfo']['moodleversion'] = $CFG->release;
+$data['serverinfo']['post_max_size'] = ini_get('post_max_size');
+$data['serverinfo']['upload_max_filesize'] = ini_get('post_max_size');
+$data['serverinfo']['max_execution_time'] = ini_get('max_execution_time');
 
 foreach ($plugininfo as $plugintype => $pluginnames) {
     foreach ($pluginnames as $pluginname => $pluginfo) {
