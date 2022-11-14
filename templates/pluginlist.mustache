@@ -36,6 +36,11 @@ Example context (json):
 
 
 }}
+
+<form method="POST">
+    <input type="submit" class="btn btn-primary"  value="Download" name="download">
+</form>
+
 <div class="h1">
 {{#str}}pluginname, local_plugincopy{{/str}}
 </div>
@@ -50,6 +55,9 @@ Example context (json):
     <li>{{#str}}operatingsystem, local_plugincopy{{/str}}: {{serverinfo.os}}</li>
     <li>{{#str}}webserver, local_plugincopy{{/str}}: {{serverinfo.webserver}}</li>
     <li>{{#str}}database, local_plugincopy{{/str}}: {{serverinfo.database}}</li>
+    <li>{{#str}}databasename, local_plugincopy{{/str}}: {{serverinfo.dbname}}</li>
+
+
 </ul>
 <h3>
 {{#str}}fileuploadsettings, local_plugincopy{{/str}}

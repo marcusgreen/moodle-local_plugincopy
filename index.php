@@ -24,16 +24,15 @@
 require_once(__DIR__ . '/../../config.php');
 
 defined('MOODLE_INTERNAL') || die();
-$PAGE->set_context(context_system::instance());
-$PAGE->set_url('/local/plugincopy');
 
 // $PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
 
+$dload = optional_param("download", '', PARAM_BOOL);
 
 $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
-echo $OUTPUT->header();
-global $DB;
+
+global $DB, $CFG;
 $data = [];
 $data['serverinfo']['os'] = php_uname('s');
 $data['serverinfo']['phpversion'] = phpversion();
@@ -43,15 +42,49 @@ $data['serverinfo']['moodleversion'] = $CFG->release;
 $data['serverinfo']['post_max_size'] = ini_get('post_max_size');
 $data['serverinfo']['upload_max_filesize'] = ini_get('post_max_size');
 $data['serverinfo']['max_execution_time'] = ini_get('max_execution_time');
+$data['serverinfo']['dbname'] = $CFG->dbname;
 
+$records = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {
     foreach ($pluginnames as $pluginname => $pluginfo) {
         if (!$pluginfo->is_standard()) {
             $data['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version: '.$pluginfo->release;
+            $records[] = $pluginfo->name;
         }
     }
 }
+$PAGE->set_context(context_system::instance());
 
-echo $OUTPUT->render_from_template('local_plugincopy/pluginlist', $data);
+$html = $OUTPUT->render_from_template('local_plugincopy/pluginlist', $data);
 
-echo $OUTPUT->footer();
+send_output($html, $dload, $records);
+
+/**
+ * Send output either to the browser or
+ * to a file download
+ *
+ * @param string $form
+ * @param string $dload
+ * @param array $data
+ * @param string $page
+ * @return void
+ */
+function send_output(string $html, string $download, array $data) : void {
+    global $OUTPUT, $PAGE;
+    if ($download) {
+        download('myfile', 'excel', ['plugin name'], $data);
+        $PAGE->set_url('/local/plugincopy');
+        echo $OUTPUT->header();
+        echo $html;
+    } else {
+        $PAGE->set_url('/local/plugincopy');
+        $PAGE->set_pagelayout('standard');
+        echo $html;
+    }
+    echo $OUTPUT->footer();
+}
+
+function download($filename, $format, $cols, $records) {
+    \core\dataformat::download_data($filename, $format, $cols, $records);
+    exit();
+}
