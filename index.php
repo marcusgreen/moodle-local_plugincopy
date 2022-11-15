@@ -24,6 +24,7 @@
 require_once(__DIR__ . '/../../config.php');
 
 defined('MOODLE_INTERNAL') || die();
+use \core\dataformat;
 
 // $PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
 
@@ -48,8 +49,8 @@ $records = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {
     foreach ($pluginnames as $pluginname => $pluginfo) {
         if (!$pluginfo->is_standard()) {
-            $data['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version: '.$pluginfo->release;
-            $records[] = $pluginfo->name;
+            $data['plugins'][]['name'] = $pluginfo->type. '_'.$pluginfo->name .', version: '.$pluginfo->versiondb;
+            $records[] = [$pluginfo->name, 'version' => $pluginfo->versiondb ];
         }
     }
 }
@@ -59,33 +60,34 @@ $PAGE->set_url('/local/plugincopy');
 
 $html = $OUTPUT->render_from_template('local_plugincopy/pluginlist', $data);
 
-echo $OUTPUT->header();
-
 send_output($html, $download, $records);
 
 /**
  * Send output either to the browser or
  * to a file download
  *
- * @param string $form
+ * @param string $html
  * @param string $dload
  * @param array $data
- * @param string $page
  * @return void
  */
 function send_output(string $html, string $download, array $data) : void {
     global $OUTPUT, $PAGE;
     if ($download) {
-        download('myfile', 'excel', ['plugin name'], $data);
+        download('plugins', 'excel', ['name', 'version'], $data);
+        echo $OUTPUT->header();
+
         echo $html;
     } else {
         $PAGE->set_pagelayout('standard');
+        echo $OUTPUT->header();
+
         echo $html;
     }
     echo $OUTPUT->footer();
 }
 
-function download($filename, $format, $cols, $records) {
-    \core\dataformat::download_data($filename, $format, $cols, $records);
+function download($filename, $format, $columns, $records) {
+    dataformat::download_data($filename, $format, $columns, $records);
     exit();
 }

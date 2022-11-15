@@ -37,10 +37,6 @@ Example context (json):
 
 }}
 
-<form method="POST">
-    <input type="submit" class="btn btn-primary"  value="Download" name="download">
-</form>
-
 <div class="h1">
 {{#str}}pluginname, local_plugincopy{{/str}}
 </div>
@@ -70,7 +66,9 @@ Example context (json):
     <li>{{#str}}uploadmaxfilesize, local_plugincopy{{/str}}: {{serverinfo.upload_max_filesize}}</li>
     <li>{{#str}}maxexecutiontime, local_plugincopy{{/str}}: {{serverinfo.max_execution_time}}</li>
 </ul>
-
+<form method="POST">
+    <input type="submit" class="mb-2 btn btn-primary"  value="{{#str}}exceldownload, local_plugincopy{{/str}}"" name="download">
+</form>
     <div class="d-grid">
         {{#plugins}}
         <div id="names" class="bg-light shadow border h5 p-1 m-0 col-sm-5">

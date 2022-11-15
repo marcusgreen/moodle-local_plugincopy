@@ -37,4 +37,4 @@ $string['uploadmaxfilesize'] = 'PHP upload max file size';
 $string['maxexecutiontime'] = 'PHP execution time';
 $string['configuration'] = 'Configuration';
 $string['databasename'] = 'Database name';
-
+$string['exceldownload'] = 'Excel download';
