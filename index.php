@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 // $PAGE->requires->js_call_amd('local_plugincopy/copy', 'init');
 
-$dload = optional_param("download", '', PARAM_BOOL);
+$download = optional_param("download", '', PARAM_BOOL);
 
 $pluginman = \core_plugin_manager::instance();
 $plugininfo = $pluginman->get_plugins();
@@ -54,10 +54,14 @@ foreach ($plugininfo as $plugintype => $pluginnames) {
     }
 }
 $PAGE->set_context(context_system::instance());
+$PAGE->set_url('/local/plugincopy');
+
 
 $html = $OUTPUT->render_from_template('local_plugincopy/pluginlist', $data);
 
-send_output($html, $dload, $records);
+echo $OUTPUT->header();
+
+send_output($html, $download, $records);
 
 /**
  * Send output either to the browser or
@@ -73,11 +77,8 @@ function send_output(string $html, string $download, array $data) : void {
     global $OUTPUT, $PAGE;
     if ($download) {
         download('myfile', 'excel', ['plugin name'], $data);
-        $PAGE->set_url('/local/plugincopy');
-        echo $OUTPUT->header();
         echo $html;
     } else {
-        $PAGE->set_url('/local/plugincopy');
         $PAGE->set_pagelayout('standard');
         echo $html;
     }
