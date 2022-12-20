@@ -44,6 +44,7 @@ $data['serverinfo']['post_max_size'] = ini_get('post_max_size');
 $data['serverinfo']['upload_max_filesize'] = ini_get('post_max_size');
 $data['serverinfo']['max_execution_time'] = ini_get('max_execution_time');
 $data['serverinfo']['dbname'] = $CFG->dbname;
+$data['serverinfo']['xdebug_client_port'] = ini_get('xdebug.client_port');
 
 $records = [];
 foreach ($plugininfo as $plugintype => $pluginnames) {

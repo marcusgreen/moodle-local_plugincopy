@@ -38,3 +38,4 @@ $string['maxexecutiontime'] = 'PHP execution time';
 $string['configuration'] = 'Configuration';
 $string['databasename'] = 'Database name';
 $string['exceldownload'] = 'Excel download';
+$string['xdebugport'] = 'Xdebug port';
